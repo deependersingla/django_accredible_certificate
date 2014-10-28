@@ -1,0 +1,22 @@
+Metadata-Version: 1.1
+Name: django-accredible-certificate
+Version: 0.1
+Summary: A openedx lms app for issuing accredible digital certificate.
+Home-page: http://www.accredible.com/
+Author: Deepender
+Author-email: deepender281190@gmail.com
+License: BSD License
+Description: Documentation for plugin install
+        
+Platform: UNKNOWN
+Classifier: Environment :: Web Environment
+Classifier: Framework :: Django
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Topic :: Internet :: WWW/HTTP
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content

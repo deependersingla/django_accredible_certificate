@@ -1,0 +1,9 @@
+MANIFEST.in
+README.rst
+setup.py
+accredible_certificate/__init__.py
+accredible_certificate/queue.py
+django_accredible_certificate.egg-info/PKG-INFO
+django_accredible_certificate.egg-info/SOURCES.txt
+django_accredible_certificate.egg-info/dependency_links.txt
+django_accredible_certificate.egg-info/top_level.txt
