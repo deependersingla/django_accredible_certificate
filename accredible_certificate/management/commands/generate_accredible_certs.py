@@ -1,6 +1,6 @@
 """
 from management command to find all students that need certificates for
-courses that have finished, and put their cert requests on the queue.
+courses that have finished, and put their cert requests to the Accredible API.
 """
 from django.core.management.base import BaseCommand, CommandError
 from certificates.models import certificate_status_for_student
@@ -23,12 +23,10 @@ class Command(BaseCommand):
 
     help = """
     Find all students that need certificates for courses that have finished and
-    put their cert requests on the queue.
+    put their cert requests on the accredible API.
 
-    If --user is given, only grade and certify the requested username.
-
-    Use the --noop option to test without actually putting certificates on the
-    queue to be generated.
+    Other commands can be private: true or not?
+    Per use need to think about it as when I completed that Edx Linux course now the certificate generated at that time so might be in use
     """
 
     option_list = BaseCommand.option_list + (
