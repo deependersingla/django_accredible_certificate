@@ -68,7 +68,7 @@ class CertificateGeneration(object):
         self.api_key = api_key
         
 
-    def add_cert(self, student, course_id, defined_status, course=None, forced_grade=None, template_file=None, title='None'):
+    def add_cert(self, student, course_id, defined_status="downloadable", course=None, forced_grade=None, template_file=None, title='None'):
         """
         Request a new certificate for a student.
 
