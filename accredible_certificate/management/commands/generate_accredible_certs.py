@@ -36,6 +36,12 @@ class Command(BaseCommand):
                     default=False,
                     help='Grade and generate certificates '
                     'for a specific course'),
+        make_option('-a', '--api_key',
+                    metavar='API_KEY',
+                    dest='api_key',
+                    default=None,
+                    help='API key for accredible Certificate, if don\'t have one'
+                    'Visit https://accredible.com/issuer/sign_up and get one'),
         make_option('-f', '--force-gen',
                     metavar='STATUS',
                     dest='force',
@@ -44,12 +50,13 @@ class Command(BaseCommand):
                     'whose entry in the certificate table matches STATUS. '
                     'STATUS can be generating, unavailable, deleted, error '
                     'or notpassing.'),
-        make_option('-a', '--api_key',
-                    metavar='API_KEY',
-                    dest='api_key',
-                    default=None,
-                    help='API key for accredible Certificate, if don\'t have one'
-                    'Visit https://accredible.com/issuer/sign_up and get one'),    
+        make_option('-s', '--styling',
+                    metavar='STYLING',
+                    dest='styling',
+                    default=False,
+                    help='Pass True to styling if you want to desgin credentials after generating them'
+                          'Visit Accredible Management Console for editing it.'
+                          'Then Run xyz command after that student will be informed and can certificate on their dashboard'),    
     )
 
     def handle(self, *args, **options):
@@ -62,10 +69,6 @@ class Command(BaseCommand):
             valid_statuses = getattr(CertificateStatuses, options['force'])
         else:
             valid_statuses = [CertificateStatuses.unavailable]
-
-        # Print update after this many students
-
-        STATUS_INTERVAL = 500
 
         if options['course']:
             # try to parse out the course from the serialized form
@@ -83,6 +86,15 @@ class Command(BaseCommand):
         else:
             raise CommandError("You must give a api_key, if don't have one visit: https://accredible.com/issuer/sign_up")
 
+        if options['styling']:
+            if options['styling'] == True: 
+                new_status = "generating"
+            else:
+                raise CommandError("You must give true if want to do no styling, no any other argument")
+        else:
+            new_status = "downloadable"
+
+
         for course_key in ended_courses:
             # prefetch all chapters/sequentials by saying depth=2
             course = modulestore().get_course(course_key, depth=2)
@@ -97,7 +109,7 @@ class Command(BaseCommand):
             for student in enrolled_students:
                 if certificate_status_for_student(
                     student, course_key)['status'] in valid_statuses:
-                      ret = xq.add_cert(student, course_key, course=course)
+                      ret = xq.add_cert(student, course_key, new_status, course=course)
                       print ret
 
          

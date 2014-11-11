@@ -68,7 +68,7 @@ class CertificateGeneration(object):
         self.api_key = api_key
         
 
-    def add_cert(self, student, course_id, course=None, forced_grade=None, template_file=None, title='None'):
+    def add_cert(self, student, course_id, defined_status, course=None, forced_grade=None, template_file=None, title='None'):
         """
         Request a new certificate for a student.
 
@@ -79,7 +79,7 @@ class CertificateGeneration(object):
                          the certificate request. If this is given, grading
                          will be skipped.
 
-        Will change the certificate status to 'generating'.
+        Will change the certificate status to 'generating' or 'downloadable'.
 
         Certificate must be in the 'unavailable', 'error',
         'deleted' or 'generating' state.
@@ -181,9 +181,8 @@ class CertificateGeneration(object):
                     r = requests.post('https://staging.accredible.com/v1/credentials', payload, headers={'Authorization':'Token token=' + self.api_key, 'Content-Type':'application/json'})
                     
                     if r.status_code == 200:
-                       json_response = r.json()
-                       new_status = 'downloadable'  
-                       cert.status = new_status
+                       json_response = r.json()  
+                       cert.status = defined_status
                        cert.key = json_response["credential"]["id"]
                        if 'private' in json_response:
                           cert.download_url = "https://wwww.accredible.com/" + str(json_response["credential"]["id"]) + "?key" + str(json_response["private_key"])
