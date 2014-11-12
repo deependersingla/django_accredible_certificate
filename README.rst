@@ -1,6 +1,6 @@
 INSTALLATION 
 
-1) Clone the accredible_certificate folder from this repo inside lms/djanogapps.
+1) Copy the accredible_certificate folder from this repo inside lms/djanogapps.
 
 2) Edit lms/envs/common.py around line 1326 you will see installed apps, include accredible_certificate also there.
 
@@ -11,6 +11,7 @@ INSTALLATION
  2) In new views file Add API key at line 32
 
 Using the Repo:
+Login to the server and change to the /edx/app/edxapp/edx-platform directory to use manage.py
  1) Change in default styling of certifcate for a particular course:
       a) Command: sudo -u www-data /edx/bin/python.edxapp ./manage.py lms --settings aws generate_accredible_certs -c edX/DemoX/Demo_Course -a "API_KEY" -s True
       
