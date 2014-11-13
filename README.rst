@@ -1,6 +1,6 @@
 INSTALLATION 
 
-1) Copy the accredible_certificate folder from this repo inside lms/djanogapps.
+1) Copy the accredible_certificate folder from this repo inside your edx-platform lms/djanogapps.
 
 2) Edit lms/envs/common.py around line 1326 you will see installed apps, include accredible_certificate also there.
 
